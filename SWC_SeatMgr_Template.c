@@ -4,7 +4,7 @@
  * \brief Rte Component Template for AUTOSAR SWC: SWC_SeatMgr
  *
  * \author Sprints AUTOSAR Authoring Tool (SAAT) v1.0.2
- * Generated on 5/2/2021 01:58 AM
+ * Generated on 5/8/2021 12:25 AM
  *
  * For any inquiries: hassan.m.farahat@gmail.com
  *
@@ -18,6 +18,7 @@
 #define MOTOR_STEP_MINUS
 #define MOTOR_STEP_PLUS
 
+
 /**
  *
  * Runnable SeatMgr_SetHeight
@@ -26,21 +27,23 @@
  *  - DataReceivedEventImpl.DRE_rp_SeatCtrlBtns_DE_HeightBtnState
  *
  */
-void Rte_Call_rpHeightMotorMove(sint8 Step);
-void Rte_Call_rpSlideMotorMove(sint8 Step);
-void Rte_Call_rpInclineMotorMove(sint8 Step);
 
 void SeatMgr_SetHeight (void)
 {
 	Std_ReturnType status;
 	MultiStateBtnType DE_HeightBtnState;
+	StepMotorStepType Arg_step;
 
 	/* Data Receive Points */
 	status = Rte_Read_rp_SeatCtrlBtns_DE_HeightBtnState(&DE_HeightBtnState);
-
-	if (DE_HeightBtnState == MULTI_STATE_BTN_PLUS) Rte_Call_rpHeightMotorMove (MOTOR_STEP_PLUS);
-	else if (DE_HeightBtnState == MULTI_STATE_BTN_MINUS) Rte_Call_rpHeightMotorMove(MOTOR_STEP_MINUS);
+	
+	if (DE_HeightBtnState == MULTI_STATE_BTN_PLUS) Arg_step =  MOTOR_STEP_PLUS;
+	else if (DE_HeightBtnState == MULTI_STATE_BTN_MINUS) Arg_step =  MOTOR_STEP_MINUS;
 	else {}
+
+	/* Server Call Points */
+	status = Rte_Call_rp_HeightMotor_Opr_Move(Arg_step);
+	
 }
 
 
@@ -57,13 +60,20 @@ void SeatMgr_SetIncline (void)
 {
 	Std_ReturnType status;
 	MultiStateBtnType DE_InclineBtnState;
+	StepMotorStepType Arg_step;
 
 	/* Data Receive Points */
 	status = Rte_Read_rp_SeatCtrlBtns_DE_InclineBtnState(&DE_InclineBtnState);
-	
-	if (DE_InclineBtnState == MULTI_STATE_BTN_PLUS) Rte_Call_rpInclineMotorMove (MOTOR_STEP_PLUS);
-	else if (DE_InclineBtnState == MULTI_STATE_BTN_MINUS) Rte_Call_rpInclineMotorMove(MOTOR_STEP_MINUS);
+
+	if (DE_InclineBtnState == MULTI_STATE_BTN_PLUS) Arg_step =  MOTOR_STEP_PLUS;
+	else if (DE_InclineBtnState == MULTI_STATE_BTN_MINUS) Arg_step = MOTOR_STEP_MINUS;
 	else {}
+
+	/* Server Call Points */
+	Rte_Call_rp_InclineMotor_Opr_Move(Arg_step);
+
+}
+	
 }
 
 
@@ -80,13 +90,16 @@ void SeatMgr_SetSlide (void)
 {
 	Std_ReturnType status;
 	MultiStateBtnType DE_SlideBtnState;
+	StepMotorStepType Arg_step;
 
 	/* Data Receive Points */
 	status = Rte_Read_rp_SeatCtrlBtns_DE_SlideBtnState(&DE_SlideBtnState);
 	
-	if (DE_SlideBtnState == MULTI_STATE_BTN_PLUS) Rte_Call_rpSlideMotorMove (MOTOR_STEP_PLUS);
-	else if (DE_SlideBtnState == MULTI_STATE_BTN_MINUS) Rte_Call_rpSlideMotorMove(MOTOR_STEP_MINUS);
+	if (DE_SlideBtnState == MULTI_STATE_BTN_PLUS) Arg_step =  MOTOR_STEP_PLUS;
+	else if (DE_SlideBtnState == MULTI_STATE_BTN_MINUS) Arg_step =  MOTOR_STEP_MINUS; 
 	else {}
-
+	/* Server Call Points */
+	status = Rte_Call_rp_SlideMotor_Opr_Move(Arg_step);
+	
 }
 
