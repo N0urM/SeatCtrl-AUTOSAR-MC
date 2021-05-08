@@ -4,7 +4,7 @@
  * \brief Rte Component Template for AUTOSAR SWC: SWC_IoHwAbs
  *
  * \author Sprints AUTOSAR Authoring Tool (SAAT) v1.0.2
- * Generated on 5/8/2021 07:18 PM
+ * Generated on 5/8/2021 08:04 PM
  *
  * For any inquiries: hassan.m.farahat@gmail.com
  *
@@ -15,14 +15,14 @@
 
 /**
  *
- * Runnable IOHwAbs_ECU_GetSlide
+ * Runnable IOHwAbs_ECU_GetHeight
  *
  * Triggered By:
- *  - OperationInvokedEventImpl.OIE_pp_IoGetSlide_Opr_IOGet
+ *  - OperationInvokedEventImpl.OIE_pp_IoGetHeight_Opr_IOGet
  *
  */
 
-void IOHwAbs_ECU_GetSlide (IoPositionSensorReadingType* position)
+void IOHwAbs_ECU_GetHeight (IoPositionSensorReadingType* position)
 {
 	Std_ReturnType status;
 
@@ -47,14 +47,14 @@ void IOHwAbs_ECU_GetIncline (IoPositionSensorReadingType* position)
 
 /**
  *
- * Runnable IOHwAbs_ECU_GetHeight
+ * Runnable IOHwAbs_ECU_GetSlide
  *
  * Triggered By:
- *  - OperationInvokedEventImpl.OIE_pp_IoGetHeight_Opr_IOGet
+ *  - OperationInvokedEventImpl.OIE_pp_IoGetSlide_Opr_IOGet
  *
  */
 
-void IOHwAbs_ECU_GetHeight (IoPositionSensorReadingType* position)
+void IOHwAbs_ECU_GetSlide (IoPositionSensorReadingType* position)
 {
 	Std_ReturnType status;
 
