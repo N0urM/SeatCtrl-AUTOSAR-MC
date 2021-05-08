@@ -4,7 +4,7 @@
  * \brief Rte Component Template for AUTOSAR SWC: SWC_HeightMotor
  *
  * \author Sprints AUTOSAR Authoring Tool (SAAT) v1.0.2
- * Generated on 5/8/2021 12:24 AM
+ * Generated on 5/8/2021 07:18 PM
  *
  * For any inquiries: hassan.m.farahat@gmail.com
  *
@@ -12,10 +12,6 @@
 
 #include "Rte_SWC_HeightMotor.h"
 
-#define MOTOR_STEP_MINUS
-#define MOTOR_STEP_PLUS
-
-#define HEIGHT_MOTOR_PIN
 
 /**
  *
@@ -28,15 +24,18 @@
 
 void RE_HeightMotorMove (StepMotorStepType Arg_step)
 {
-		switch (Arg_step)
+	Std_ReturnType status;
+
+	/* Server Call Points */
+	switch (Arg_step)
 	{
 		case MOTOR_STEP_MINUS:
-			Dio_WriteChannel( HEIGHT_MOTOR_PIN , STD_LOW);
+			status = Rte_Call_rp_IOSetHeight_Opr_IOSetReversed();
 			break; 
 		case MOTOR_STEP_PLUS:
-			Dio_WriteChannel( HEIGHT_MOTOR_PIN , STD_HIGH);
+			status = Rte_Call_rp_IOSetHeight_Opr_IOSetForward();
 			break; 
 	}
-
+	
 }
 

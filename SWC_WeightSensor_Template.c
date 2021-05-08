@@ -4,7 +4,7 @@
  * \brief Rte Component Template for AUTOSAR SWC: SWC_WeightSensor
  *
  * \author Sprints AUTOSAR Authoring Tool (SAAT) v1.0.2
- * Generated on 5/8/2021 03:02 AM
+ * Generated on 5/8/2021 07:30 PM
  *
  * For any inquiries: hassan.m.farahat@gmail.com
  *
@@ -22,9 +22,15 @@
  *
  */
 
-void WeightSensor_GetPosition (Impl_SensorWeightType* weight)
+void WeightSensor_GetPosition (Impl_SensorWeightType* Weight)
 {
-	Std_ReturnType status = ADC_ReadGroup (SensorGroup , weight);
+	Std_ReturnType status;
+	IoWeightSensorReadingType weight;
 
+	/* Server Call Points */
+	status = Rte_Call_rp_IoGetWeight_Opr_IOGet(&weight);
+
+	Weight = weight/100; 
+	
 }
 
