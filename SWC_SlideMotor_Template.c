@@ -37,4 +37,3 @@ void RE_SlideMotorMove (StepMotorStepType Arg_step)
 			break; 
 	}
 }
-
