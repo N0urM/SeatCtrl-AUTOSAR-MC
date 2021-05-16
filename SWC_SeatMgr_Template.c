@@ -4,7 +4,7 @@
  * \brief Rte Component Template for AUTOSAR SWC: SWC_SeatMgr
  *
  * \author Sprints AUTOSAR Authoring Tool (SAAT) v1.0.2
- * Generated on 5/8/2021 02:32 AM
+ * Generated on 5/16/2021 07:53 PM
  *
  * For any inquiries: hassan.m.farahat@gmail.com
  *
@@ -87,18 +87,15 @@ static boolean IsPositionAdjustingNeeded (Impl_SensorPositionType position , Imp
 void SeatMgr_AutoHeight (void)
 {
 	Std_ReturnType status;
-	StepMotorStepType step;
+	StepMotorStepType Arg_step;
 	Impl_SensorPositionType position;
 	Impl_SensorWeightType weight;
-	
+
 	/* Server Call Points */
 	status = Rte_Call_rp_HeightSensor_Opr_GetPosition(&position);
 	status = Rte_Call_rp_WeightSensor_GetWeight(&weight);
-
-	IsPositionAdjustingNeeded(position  , weight , &step);
-
-	status = Rte_Call_rp_HeightMotor_Opr_Move(step);
-
+	IsPositionAdjustingNeeded(position  , weight , &Arg_step);
+	status = Rte_Call_rp_HeightMotor_Opr_Move(Arg_step);	
 }
 
 
@@ -114,18 +111,16 @@ void SeatMgr_AutoHeight (void)
 void SeatMgr_AutoIncline (void)
 {
 	Std_ReturnType status;
-	StepMotorStepType tep;
+	StepMotorStepType Arg_step;
 	Impl_SensorPositionType position;
 	Impl_SensorWeightType weight;
 
 	/* Server Call Points */
 	status = Rte_Call_rp_InclineSensor_Opr_GetPosition(&position);
 	status = Rte_Call_rp_WeightSensor_GetWeight(&weight);
-
-	IsPositionAdjustingNeeded(position  , weight , &step);
-
-	status = Rte_Call_rp_InclineMotor_Opr_Move(step);
-
+	IsPositionAdjustingNeeded(position  , weight , &Arg_step);
+	status = Rte_Call_rp_InclineMotor_Opr_Move(Arg_step);
+	
 }
 
 
@@ -141,20 +136,16 @@ void SeatMgr_AutoIncline (void)
 void SeatMgr_AutoSlide (void)
 {
 	Std_ReturnType status;
-	StepMotorStepType step;
+	StepMotorStepType Arg_step;
 	Impl_SensorPositionType position;
 	Impl_SensorWeightType weight;
 
 	/* Server Call Points */
 	status = Rte_Call_rp_SlideSensor_Opr_GetPosition(&position);
 	status = Rte_Call_rp_WeightSensor_GetWeight(&weight);
-
-	IsPositionAdjustingNeeded(position  , weight , &step);
-
-	status = Rte_Call_rp_SlideMotor_Opr_Move(step);
-
+	IsPositionAdjustingNeeded(position  , weight , &Arg_step);
+	status = Rte_Call_rp_SlideMotor_Opr_Move(Arg_step);
 }
-
 
 
 /**
@@ -178,7 +169,7 @@ void SeatMgr_SetHeight (void)
 	if (DE_HeightBtnState == MULTI_STATE_BTN_PLUS) Arg_step =  MOTOR_STEP_PLUS;
 	else if (DE_HeightBtnState == MULTI_STATE_BTN_MINUS) Arg_step =  MOTOR_STEP_MINUS;
 	else {}
-
+	
 	/* Server Call Points */
 	status = Rte_Call_rp_HeightMotor_Opr_Move(Arg_step);
 	
@@ -202,15 +193,13 @@ void SeatMgr_SetIncline (void)
 
 	/* Data Receive Points */
 	status = Rte_Read_rp_SeatCtrlBtns_DE_InclineBtnState(&DE_InclineBtnState);
-
+	
 	if (DE_InclineBtnState == MULTI_STATE_BTN_PLUS) Arg_step =  MOTOR_STEP_PLUS;
 	else if (DE_InclineBtnState == MULTI_STATE_BTN_MINUS) Arg_step = MOTOR_STEP_MINUS;
 	else {}
 
 	/* Server Call Points */
-	Rte_Call_rp_InclineMotor_Opr_Move(Arg_step);
-
-}
+	status = Rte_Call_rp_InclineMotor_Opr_Move(Arg_step);
 	
 }
 
